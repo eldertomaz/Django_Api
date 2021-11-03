@@ -2,8 +2,8 @@ from django.db.models.aggregates import Sum
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from rest_framework import generics, viewsets
-from .models import Silo
-from .serializers import SiloSerializer
+from .models import Silo, SiloFeedWeight
+from .serializers import SiloFeedWeightSerializer, SiloSerializer
 from django.http import HttpResponse, response
 from django_filters import rest_framework as filters
 
@@ -36,10 +36,16 @@ class SiloExtra(viewsets.ModelViewSet):
         print(self.get_queryset())
         return response.HttpResponseServerError({'Adicionar as datas de inicio(start) e fim(end) como parametro'})
 
-class SiloList(viewsets.ModelViewSet):
+class SiloViews(viewsets.ModelViewSet):
     queryset = Silo.objects.all()
     serializer_class = SiloSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = '__all__'
     def get_queryset(self):
         return super().get_queryset()
+
+class SiloWeightViews(viewsets.ModelViewSet):
+    queryset = SiloFeedWeight.objects.all()
+    serializer_class = SiloFeedWeightSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = '__all__'
