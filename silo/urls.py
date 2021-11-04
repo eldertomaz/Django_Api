@@ -8,7 +8,7 @@ urlpatterns = [
     #GET
     url(r'^silo_feed_weight/', views.SiloWeightViews.as_view({'get': 'list'}), name='silo-list'),
     #GET SILO POR DATA
-    #url(r'^silo_extra/', views.SiloExtra.as_view({'get': 'list'}), name='silo-list'),
+    url(r'^silo_extra/', views.SiloExtra.as_view({'get': 'list'}), name='silo-list'),
     
 ]
 
